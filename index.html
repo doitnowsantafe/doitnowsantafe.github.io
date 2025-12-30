@@ -19,7 +19,11 @@
   --card-bg: rgba(22, 47, 54, 0.7);
 }
 
-html { scroll-behavior: smooth; }
+/* Activación de Snap Scroll */
+html { 
+    scroll-behavior: smooth; 
+    scroll-snap-type: y proximity; 
+}
 
 *{
   margin:0;
@@ -37,12 +41,21 @@ body{
   width: 100%;
 }
 
+/* Secciones como pantallas completas */
+section, .area-container {
+    scroll-snap-align: start;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
 img {
   max-width: 100%;
   height: auto;
 }
 
-section{ padding:100px 10%; }
+section{ padding:80px 10%; }
 
 h2 { 
   font-size: 2.8rem; 
@@ -93,8 +106,7 @@ h2 {
 
 /* --- HERO --- */
 .hero{
-  min-height:100vh;
-  padding-top:140px;
+  padding-top:100px;
   display:grid;
   grid-template-columns:1.2fr .8fr;
   gap:60px;
@@ -116,14 +128,14 @@ h2 {
   display:grid;
   grid-template-columns:1fr 1fr;
   gap:80px;
-  margin-bottom:80px;
   align-items: center;
   background: var(--card-bg);
   padding: 50px;
   border-radius: 30px;
   border: 1px solid rgba(255,255,255,0.05);
-  overflow: hidden; /* Evita desbordes de hijos */
+  margin-bottom: 20px;
 }
+
 .area img{
   width:100%;
   border-radius:20px;
@@ -131,7 +143,7 @@ h2 {
   height: 420px;
   box-shadow: 0 15px 35px rgba(0,0,0,0.4);
 }
-.area h3{ color:var(--accent); font-size:2.4rem; margin-bottom: 10px; word-wrap: break-word; }
+.area h3{ color:var(--accent); font-size:2.4rem; margin-bottom: 10px; }
 
 .btn-group { display: flex; gap: 10px; margin-top: 20px; flex-wrap: wrap; }
 .toggle-btn{
@@ -150,11 +162,12 @@ h2 {
 
 .extra-content {
   display: none;
-  padding: 20px;
+  padding: 15px;
   background: rgba(0,0,0,0.3);
   border-radius: 15px;
   border-left: 4px solid var(--accent);
   margin-top: 15px;
+  font-size: 0.9rem;
   animation: slideDown 0.4s ease;
 }
 
@@ -179,51 +192,59 @@ h2 {
   border: 1px solid rgba(30, 199, 182, 0.2);
 }
 
-/* --- RESPONSIVE --- */
+/* --- RESPONSIVE MOVIL (FULL SCREEN) --- */
 @media(max-width:900px){
-  section{ padding:60px 5%; } /* Menos padding lateral para ganar espacio */
+  section { 
+    padding: 80px 5% 40px 5%; 
+    height: auto;
+    min-height: 100vh;
+  }
   
   .hamburger { display: block; }
   .nav-menu {
     position: fixed; top: 0; right: -100%; width: 80%; height: 100vh;
     background: var(--bg-dark); flex-direction: column; justify-content: center; transition: 0.5s;
+    z-index: 2000;
   }
   .nav-menu.active { right: 0; }
   .nav-menu a { margin: 15px 0; font-size: 1.3rem; }
   
-  .hamburger.active span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
-  .hamburger.active span:nth-child(2) { opacity: 0; }
-  .hamburger.active span:nth-child(3) { transform: rotate(-45deg) translate(7px, -7px); }
-  
-  .hero, .area, .session-cards { grid-template-columns:1fr; text-align: center; }
-  
-  .hero h1 { font-size: 2.5rem; }
-  
-  /* CORRECCIÓN CLAVE PARA EL RECUADRO */
-  .area { 
-    padding: 30px 20px; 
-    gap: 30px;
-    border-radius: 20px;
-    width: 100%;
+  .hero, .area, .session-cards { 
+    grid-template-columns: 1fr; 
+    text-align: center; 
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100%;
   }
+
+  /* Ajuste de cada presentación a pantalla completa */
+  .area {
+    min-height: calc(100vh - 40px);
+    margin-bottom: 0;
+    border-radius: 0;
+    background: transparent;
+    border: none;
+    padding: 20px;
+    scroll-snap-align: start;
+  }
+
   .area img { 
     order: -1; 
-    height: 280px; 
-    width: 100%;
+    height: 200px; /* Reducido para que quepa el texto */
+    width: 90%;
+    margin: 0 auto 20px;
   }
+
   .area h3 { font-size: 1.8rem; }
+  .hero h1 { font-size: 2.2rem; }
   
-  .btn-group { justify-content: center; }
-  .toggle-btn { font-size: 0.7rem; padding: 10px 15px; }
+  /* Ajuste sesiones para que entren ambas o una por pantalla */
+  .session-cards { gap: 15px; }
+  .card { padding: 20px; }
 }
 
-@media(max-width:480px) {
-    h2 { font-size: 2rem; }
-    .hero h1 { font-size: 2.1rem; }
-    .area h3 { font-size: 1.6rem; }
-}
-
-.footer{ text-align:center; padding:50px; background: var(--bg-dark); color:var(--muted); }
+.footer{ text-align:center; padding:50px; background: var(--bg-dark); color:var(--muted); scroll-snap-align: end; }
 </style>
 </head>
 
@@ -241,138 +262,131 @@ h2 {
 </header>
 
 <section class="hero">
-  <div data-aos="fade-right">
+  <div data-aos="fade-up">
     <h1>¿Por qué se repiten tus historias?<br><span>Encontremos la raíz.</span></h1>
-    <p>En <b>Do It Now</b> te acompaño a descifrar los códigos de tu inconsciente para transformar tu salud, tus vínculos y tu rendimiento profesional.</p>
+    <p>En <b>Do It Now</b> te acompaño a descifrar los códigos de tu inconsciente.</p>
     <a href="#areas" class="toggle-btn" style="display:inline-block; text-decoration:none; margin-top:30px;">Explorar herramientas ↓</a>
   </div>
-  <div class="hero-image" data-aos="fade-left">
-    <img src="ImagenOficina.png" alt="Do It Now">
+  <div class="hero-image" data-aos="fade-up">
+    <img src="ImagenOficina.png" alt="Do It Now" style="max-height: 30vh; object-fit: contain;">
   </div>
 </section>
 
-<section id="areas">
-  <h2 data-aos="fade-up">Disciplinas para tu evolución</h2>
+<div id="areas">
+    <section class="area" data-aos="fade-up">
+        <img src="https://images.unsplash.com/photo-1559757148-5c350d0d3c56" alt="Bioneuroemoción">
+        <div>
+          <h3>Bioneuroemoción</h3>
+          <p class="intro">Escuchá el mensaje oculto de tus síntomas.</p>
+          <div class="btn-group">
+            <button class="toggle-btn" onclick="showTab(this, 'que-bio')">¿Qué es?</button>
+            <button class="toggle-btn" onclick="showTab(this, 'mi-bio')">¿Es para mí?</button>
+          </div>
+          <div id="que-bio" class="extra-content">
+            <p>Investigamos la raíz emocional de tus conflictos y programas heredados.</p>
+          </div>
+          <div id="mi-bio" class="extra-content">
+            <p>Si repetís patrones en parejas o tenés síntomas físicos recurrentes.</p>
+          </div>
+        </div>
+    </section>
 
-  <div class="area" data-aos="fade-up">
-    <img src="https://images.unsplash.com/photo-1559757148-5c350d0d3c56" alt="Bioneuroemoción">
-    <div>
-      <h3>Bioneuroemoción</h3>
-      <p class="intro">Escuchá el mensaje oculto de tus síntomas.</p>
-      <div class="btn-group">
-        <button class="toggle-btn" onclick="showTab(this, 'que-bio')">¿De qué se trata?</button>
-        <button class="toggle-btn" onclick="showTab(this, 'mi-bio')">¿Es para mí?</button>
-      </div>
-      <div id="que-bio" class="extra-content">
-        <p>Investigamos la raíz emocional de tus conflictos. Tu cuerpo no se equivoca: responde a un estrés no gestionado o a programas heredados de tu árbol familiar.</p>
-      </div>
-      <div id="mi-bio" class="extra-content">
-        <p>Si repetís patrones en parejas, tenés síntomas físicos recurrentes o sentís bloqueos con el dinero que no podés explicar.</p>
-      </div>
-    </div>
-  </div>
+    <section class="area" data-aos="fade-up">
+        <img src="Pendulo2.jpg" alt="Péndulo Hebreo">
+        <div>
+          <h3>Péndulo Hebreo</h3>
+          <p class="intro">Limpieza y recalibración energética.</p>
+          <div class="btn-group">
+            <button class="toggle-btn" onclick="showTab(this, 'que-pen')">¿Qué es?</button>
+            <button class="toggle-btn" onclick="showTab(this, 'mi-pen')">¿Es para mí?</button>
+          </div>
+          <div id="que-pen" class="extra-content">
+            <p>Detecta y elimina bloqueos en tu aura y restaura tus chakras.</p>
+          </div>
+          <div id="mi-pen" class="extra-content">
+            <p>Ideal si sentís fatiga extrema o proyectos estancados.</p>
+          </div>
+        </div>
+    </section>
 
-  <div class="area" data-aos="fade-up">
-    <div>
-      <h3>Péndulo Hebreo</h3>
-      <p class="intro">Limpieza y recalibración energética.</p>
-      <div class="btn-group">
-        <button class="toggle-btn" onclick="showTab(this, 'que-pen')">¿De qué se trata?</button>
-        <button class="toggle-btn" onclick="showTab(this, 'mi-pen')">¿Es para mí?</button>
-      </div>
-      <div id="que-pen" class="extra-content">
-        <p>Detecta y elimina bloqueos o memorias negativas en tu aura antes de que lleguen al cuerpo físico. Restaura la vibración de tus chakras.</p>
-      </div>
-      <div id="mi-pen" class="extra-content">
-        <p>Ideal si sentís fatiga extrema, pesadez mental o si sentís que tus proyectos están estancados energéticamente.</p>
-      </div>
-    </div>
-    <img src="Pendulo2.jpg" alt="Péndulo Hebreo">
-  </div>
+    <section class="area" data-aos="fade-up">
+        <img src="Hipnosis.jpg" alt="Hipnosis">
+        <div>
+          <h3>Hipnosis Clínica</h3>
+          <p class="intro">Reprogramación del subconsciente.</p>
+          <div class="btn-group">
+            <button class="toggle-btn" onclick="showTab(this, 'que-hip')">¿Qué es?</button>
+            <button class="toggle-btn" onclick="showTab(this, 'mi-hip')">¿Es para mí?</button>
+          </div>
+          <div id="que-hip" class="extra-content">
+            <p>Estado de enfoque para instalar creencias potenciadoras de forma segura.</p>
+          </div>
+          <div id="mi-hip" class="extra-content">
+            <p>Para superar fobias, hábitos nocivos o aumentar autoconfianza.</p>
+          </div>
+        </div>
+    </section>
 
-  <div class="area" data-aos="fade-up">
-    <img src="Hipnosis.jpg" alt="Hipnosis">
-    <div>
-      <h3>Hipnosis Clínica</h3>
-      <p class="intro">Reprogramación directa del subconsciente.</p>
-      <div class="btn-group">
-        <button class="toggle-btn" onclick="showTab(this, 'que-hip')">¿De qué se trata?</button>
-        <button class="toggle-btn" onclick="showTab(this, 'mi-hip')">¿Es para mí?</button>
-      </div>
-      <div id="que-hip" class="extra-content">
-        <p>Un estado de enfoque donde instalamos creencias potenciadoras y desarmamos traumas antiguos de forma segura y rápida.</p>
-      </div>
-      <div id="mi-hip" class="extra-content">
-        <p>Para superar fobias, dejar hábitos nocivos, aumentar tu autoconfianza o sanar heridas que la charla consciente no logra resolver.</p>
-      </div>
-    </div>
-  </div>
-
-  <div class="area" data-aos="fade-up">
-    <div>
-      <h3>Coaching Deportivo y Ontológico</h3>
-      <p class="intro">Alcanzá tu máximo potencial y maestría personal.</p>
-      <div class="btn-group">
-        <button class="toggle-btn" onclick="showTab(this, 'que-coa')">¿De qué se trata?</button>
-        <button class="toggle-btn" onclick="showTab(this, 'mi-coa')">¿Es para mí?</button>
-      </div>
-      <div id="que-coa" class="extra-content">
-        <p>Trabajamos sobre el lenguaje, la emoción y el cuerpo. Desafiamos tus juicios limitantes para que pases de ser víctima a protagonista de tus resultados.</p>
-      </div>
-      <div id="mi-coa" class="extra-content">
-        <p>Fundamental para deportistas que buscan gestionar la presión, líderes de equipos o personas en procesos de cambio profesional.</p>
-      </div>
-    </div>
-    <img src="Coaching.png" alt="Coaching Deportivo">
-  </div>
-</section>
+    <section class="area" data-aos="fade-up">
+        <img src="Coaching.png" alt="Coaching Deportivo">
+        <div>
+          <h3>Coaching</h3>
+          <p class="intro">Máximo potencial y maestría personal.</p>
+          <div class="btn-group">
+            <button class="toggle-btn" onclick="showTab(this, 'que-coa')">¿Qué es?</button>
+            <button class="toggle-btn" onclick="showTab(this, 'mi-coa')">¿Es para mí?</button>
+          </div>
+          <div id="que-coa" class="extra-content">
+            <p>Trabajamos sobre el lenguaje y la emoción para pasar a ser protagonista.</p>
+          </div>
+          <div id="mi-coa" class="extra-content">
+            <p>Para deportistas bajo presión o líderes en procesos de cambio.</p>
+          </div>
+        </div>
+    </section>
+</div>
 
 <section id="sessions">
-  <h2 data-aos="fade-up">Modalidades de Sesión</h2>
+  <h2 data-aos="fade-up">Modalidades</h2>
   <div class="session-cards">
-    <div class="card" data-aos="zoom-in-right">
+    <div class="card" data-aos="zoom-in">
       <h3>Sesión Focalizada</h3>
-      <p>Indagación puntual sobre un síntoma o limpieza energética con Péndulo Hebreo.</p>
-      <p style="margin-top:20px; font-weight:bold; color:var(--accent);">Duración: 1 hora.</p>
+      <p>Indagación puntual o Péndulo Hebreo. (1h)</p>
     </div>
-    <div class="card" data-aos="zoom-in-left">
+    <div class="card" data-aos="zoom-in">
       <h3>Proceso Do It Now</h3>
-      <p>Inmersión profunda integrando todas las herramientas para una transformación real de raíz.</p>
-      <p style="margin-top:20px; font-weight:bold; color:var(--accent);">Duración: 2 horas.</p>
+      <p>Inmersión profunda integral. (2h)</p>
     </div>
   </div>
 </section>
 
 <section class="about" id="about">
-  <div class="area" style="background:none; border:none; padding:10px;">
-    <div data-aos="fade-right">
-      <h2 style="text-align:left;">Soy Claudia</h2>
-      <p style="margin-bottom: 20px;">Fundadora de <b>Do It Now</b>. Mi propósito es que seas el arquitecto de tu transformación. Cuento con la siguiente trayectoria académica: </p>
-      <ul style="color:var(--muted); list-style:none; line-height: 1.8; font-size: 0.95rem; text-align: left;">
-          <li style="margin-bottom: 10px;">• <b>Instructora de Mindfulness</b> y <b>Coach Ontológico Profesional y Deportivo</b>.</li>
-          <li style="margin-bottom: 10px;">• Posgrado en <b>Psicología Deportiva</b> (Universidad Austral).</li>
-          <li style="margin-bottom: 10px;">• Diplomado y Maestría en <b>Biodescodificación (PVK)</b>.</li>
-          <li style="margin-bottom: 10px;">• Diplomado en <b>Hipnosis</b> y <b>Péndulo Hebreo</b>.</li>
-          <li style="margin-bottom: 10px;">• Actualmente cursando Posgrado de <b>Bioemoción (UNR)</b>.</li>
+    <div data-aos="fade-up" style="text-align: center;">
+      <h2 style="margin-bottom: 10px;">Soy Claudia</h2>
+      <img src="Claudia.png" alt="Claudia" style="height: 180px; width: 180px; border-radius: 50%; object-fit: cover; margin-bottom: 20px;">
+      <ul style="color:var(--muted); list-style:none; font-size: 0.9rem; text-align: center;">
+          <li>• Coach Ontológico y Deportivo</li>
+          <li>• Posgrado Psicología Deportiva</li>
+          <li>• Maestría en Biodescodificación</li>
+          <li>• Hipnosis y Péndulo Hebreo</li>
       </ul>
     </div>
-    <img src="Claudia.png" alt="Claudia" style="height: auto; max-width: 350px; margin: 20px auto;" data-aos="fade-left">
-  </div>
 </section>
 
 <section id="contact">
   <div class="contact-box" data-aos="flip-up">
     <h2>Hablemos</h2>
-    <p style="margin-bottom: 30px;">¿Estás listo para dar el primer paso?</p>
-    <a href="https://wa.me/543424236021" class="toggle-btn" style="text-decoration:none; padding: 18px 50px;">WhatsApp Directo</a>
+    <p style="margin-bottom: 30px;">¿Estás listo para el cambio?</p>
+    <a href="https://wa.me/543424236021" class="toggle-btn" style="text-decoration:none; padding: 18px 50px; display: block;">WhatsApp Directo</a>
   </div>
 </section>
 
-<footer class="footer">© 2025 · Do It Now · Claudia De Vaux</footer>
+<footer class="footer">© 2025 · Do It Now</footer>
 
 <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 <script>
-  AOS.init({ duration: 1000, once: true });
+  AOS.init({ duration: 800, once: false }); // Once: false para que repita al subir/bajar
+  
   const hamburger = document.getElementById('hamburger');
   const navMenu = document.getElementById('nav-menu');
   
