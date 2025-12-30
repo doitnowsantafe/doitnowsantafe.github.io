@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>Do It Now</title>
+<title>Do It Now · Clau · Procesos de Transformación</title>
 
 <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 
@@ -19,7 +19,6 @@
   --card-bg: rgba(22, 47, 54, 0.7);
 }
 
-/* Activación de Snap Scroll */
 html { 
     scroll-behavior: smooth; 
     scroll-snap-type: y proximity; 
@@ -41,28 +40,23 @@ body{
   width: 100%;
 }
 
-/* Secciones como pantallas completas */
-section, .area-container {
+section {
     scroll-snap-align: start;
     min-height: 100vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
+    align-items: center; 
+    padding: 80px 10%;
+    text-align: center;
 }
-
-img {
-  max-width: 100%;
-  height: auto;
-}
-
-section{ padding:80px 10%; }
 
 h2 { 
   font-size: 2.8rem; 
-  margin-bottom: 40px; 
+  margin-bottom: 30px; 
   color: var(--accent); 
-  text-align: center;
   letter-spacing: -1px;
+  width: 100%;
 }
 
 /* --- HEADER --- */
@@ -78,12 +72,10 @@ h2 {
   background:rgba(11, 28, 33, 0.85);
   backdrop-filter: blur(12px);
   z-index:1000;
-  transition: 0.4s;
   border-bottom: 1px solid rgba(30, 199, 182, 0.1);
 }
 
-.header.scrolled { padding: 12px 10%; background: rgba(8, 23, 27, 0.95); }
-.logo{ color:var(--accent); font-weight:700; font-size:1.4rem; z-index: 1001; letter-spacing: 1px;}
+.logo{ color:var(--accent); font-weight:700; font-size:1.4rem; letter-spacing: 1px;}
 
 .nav-menu { display: flex; align-items: center; }
 .nav-menu a {
@@ -91,70 +83,61 @@ h2 {
   color:var(--text);
   text-decoration:none;
   font-size:.9rem;
-  transition: 0.3s;
-}
-.nav-menu a:hover { color: var(--accent); }
-.nav-menu .cta {
-  border:1px solid var(--accent);
-  padding:8px 20px;
-  border-radius: 50px;
-  color:var(--accent);
 }
 
-.hamburger { display: none; cursor: pointer; z-index: 1001; background: none; border: none; }
-.hamburger span { display: block; width: 25px; height: 3px; background: var(--accent); margin: 5px 0; transition: 0.4s; }
+.hamburger { display: none; cursor: pointer; background: none; border: none; }
+.hamburger span { display: block; width: 25px; height: 3px; background: var(--accent); margin: 5px 0; }
 
-/* --- HERO --- */
-.hero{
-  padding-top:100px;
-  display:grid;
-  grid-template-columns:1.2fr .8fr;
-  gap:60px;
-  align-items:center;
+/* --- HERO (Ajuste de Imagen) --- */
+.hero {
+  padding-top: 100px;
 }
-.hero h1{ font-size:4rem; line-height:1.1; font-weight: 800; }
-.hero span{ color:var(--accent); text-shadow: 0 0 20px var(--accent-glow); }
-.hero p{ margin-top:25px; font-size:1.3rem; color:var(--muted); }
-.hero-image img{
-  width:100%;
-  max-width:450px;
-  border-radius:24px;
-  box-shadow:0 40px 100px rgba(0,0,0,0.6);
-  border: 1px solid rgba(255,255,255,0.1);
+.hero h1{ font-size:3.5rem; line-height:1.1; font-weight: 800; max-width: 900px; }
+.hero span{ color:var(--accent); }
+.hero p{ margin: 20px auto; font-size:1.2rem; color:var(--muted); max-width: 600px; }
+
+.hero-image {
+  width: 100%;
+  max-width: 800px;
+  margin-top: 30px;
+  display: flex;
+  justify-content: center;
+}
+
+.hero-image img {
+  width: 100%;
+  height: auto;
+  border-radius: 24px;
+  box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+  object-fit: cover;
 }
 
 /* --- AREAS --- */
-.area{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:80px;
+.area {
+  display: flex;
+  flex-direction: row;
   align-items: center;
+  gap: 50px;
+  width: 100%;
+  max-width: 1100px;
   background: var(--card-bg);
-  padding: 50px;
+  padding: 40px;
   border-radius: 30px;
-  border: 1px solid rgba(255,255,255,0.05);
-  margin-bottom: 20px;
+  margin: 0 auto;
 }
 
-.area img{
-  width:100%;
-  border-radius:20px;
-  object-fit: cover;
-  height: 420px;
-  box-shadow: 0 15px 35px rgba(0,0,0,0.4);
-}
-.area h3{ color:var(--accent); font-size:2.4rem; margin-bottom: 10px; }
+.area-content { flex: 1; text-align: left; }
+.area-img { flex: 1; width: 100%; border-radius: 20px; height: 400px; object-fit: cover; }
 
 .btn-group { display: flex; gap: 10px; margin-top: 20px; flex-wrap: wrap; }
 .toggle-btn{
   background: transparent;
   border: 1px solid var(--accent);
   color: var(--accent);
-  padding: 10px 20px;
+  padding: 12px 24px;
   cursor:pointer;
   font-weight: 600;
   border-radius: 50px;
-  transition: 0.3s;
   text-transform: uppercase;
   font-size: 0.75rem;
 }
@@ -163,88 +146,84 @@ h2 {
 .extra-content {
   display: none;
   padding: 15px;
-  background: rgba(0,0,0,0.3);
+  background: rgba(0,0,0,0.2);
   border-radius: 15px;
   border-left: 4px solid var(--accent);
   margin-top: 15px;
-  font-size: 0.9rem;
-  animation: slideDown 0.4s ease;
+  text-align: left;
 }
 
-@keyframes slideDown { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
-
 /* --- SESIONES --- */
-.session-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; }
+.session-cards { 
+  display: grid; 
+  grid-template-columns: 1fr 1fr; 
+  gap: 30px; 
+  width: 100%;
+  max-width: 1000px;
+}
 .card {
   background: var(--card-bg);
   padding: 40px;
   border-radius: 25px;
-  border: 1px solid rgba(255,255,255,0.05);
-}
-.card h3 { color: var(--accent); margin-bottom: 10px; }
-
-/* --- CONTACTO --- */
-.contact-box {
-  background: linear-gradient(135deg, var(--bg-soft), var(--bg-dark));
-  padding: 60px 30px;
-  border-radius: 40px;
-  text-align: center;
-  border: 1px solid rgba(30, 199, 182, 0.2);
 }
 
-/* --- RESPONSIVE MOVIL (FULL SCREEN) --- */
+/* --- RESPONSIVE MOVIL --- */
 @media(max-width:900px){
   section { 
-    padding: 80px 5% 40px 5%; 
-    height: auto;
+    padding: 80px 20px 40px;
     min-height: 100vh;
   }
   
   .hamburger { display: block; }
   .nav-menu {
-    position: fixed; top: 0; right: -100%; width: 80%; height: 100vh;
+    position: fixed; top: 0; right: -100%; width: 100%; height: 100vh;
     background: var(--bg-dark); flex-direction: column; justify-content: center; transition: 0.5s;
     z-index: 2000;
   }
   .nav-menu.active { right: 0; }
-  .nav-menu a { margin: 15px 0; font-size: 1.3rem; }
   
-  .hero, .area, .session-cards { 
-    grid-template-columns: 1fr; 
-    text-align: center; 
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+  .hero { justify-content: flex-start; }
+  .hero h1 { font-size: 2rem; margin-top: 20px; }
+  .hero p { font-size: 1rem; margin: 15px auto; }
+  
+  /* Imagen de Portada Expandida en Móvil */
+  .hero-image {
+    max-width: 100%;
+    margin-top: 20px;
+    height: 35vh; /* Ocupa el 35% del alto de pantalla */
+  }
+  .hero-image img {
     height: 100%;
+    width: 100%;
+    object-fit: cover; /* Esto hace que la imagen llene el espacio sin verse chica */
+    border-radius: 20px;
   }
-
-  /* Ajuste de cada presentación a pantalla completa */
-  .area {
-    min-height: calc(100vh - 40px);
-    margin-bottom: 0;
-    border-radius: 0;
-    background: transparent;
-    border: none;
-    padding: 20px;
-    scroll-snap-align: start;
-  }
-
-  .area img { 
-    order: -1; 
-    height: 200px; /* Reducido para que quepa el texto */
-    width: 90%;
-    margin: 0 auto 20px;
-  }
-
-  .area h3 { font-size: 1.8rem; }
-  .hero h1 { font-size: 2.2rem; }
   
-  /* Ajuste sesiones para que entren ambas o una por pantalla */
-  .session-cards { gap: 15px; }
+  .area {
+    flex-direction: column;
+    background: transparent;
+    padding: 0;
+    gap: 15px;
+  }
+
+  .area-content { text-align: center; display: flex; flex-direction: column; align-items: center; width: 100%; }
+  .area-img { 
+    order: -1; 
+    height: 30vh; 
+    width: 100%;
+    max-width: 100%; 
+    border-radius: 20px;
+  }
+
+  .area h3 { font-size: 1.7rem; }
+  .btn-group { justify-content: center; }
+  .extra-content { text-align: center; border-left: none; border-top: 3px solid var(--accent); }
+
+  .session-cards { grid-template-columns: 1fr; gap: 15px; }
   .card { padding: 20px; }
 }
 
-.footer{ text-align:center; padding:50px; background: var(--bg-dark); color:var(--muted); scroll-snap-align: end; }
+.footer{ text-align:center; padding:40px; background: var(--bg-dark); color:var(--muted); scroll-snap-align: end; }
 </style>
 </head>
 
@@ -252,9 +231,11 @@ h2 {
 
 <header class="header" id="header">
   <div class="logo">DO IT NOW</div>
-  <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+  <button class="hamburger" id="hamburger" onclick="toggleMenu()">
+    <span></span><span></span><span></span>
+  </button>
   <nav class="nav-menu" id="nav-menu">
-    <a href="#areas" onclick="closeMenu()">Herramientas</a>
+    <a href="#bio" onclick="closeMenu()">Herramientas</a>
     <a href="#sessions" onclick="closeMenu()">Sesiones</a>
     <a href="#about" onclick="closeMenu()">Sobre mí</a>
     <a href="#contact" class="cta" onclick="closeMenu()">Hablemos</a>
@@ -262,141 +243,119 @@ h2 {
 </header>
 
 <section class="hero">
-  <div data-aos="fade-up">
+  <div data-aos="fade-down">
     <h1>¿Por qué se repiten tus historias?<br><span>Encontremos la raíz.</span></h1>
-    <p>En <b>Do It Now</b> te acompaño a descifrar los códigos de tu inconsciente.</p>
-    <a href="#areas" class="toggle-btn" style="display:inline-block; text-decoration:none; margin-top:30px;">Explorar herramientas ↓</a>
+    <p>Te acompaño a descifrar los códigos de tu inconsciente para transformar tu vida.</p>
+    <a href="#bio" class="toggle-btn" style="display:inline-block; text-decoration:none;">Explorar ↓</a>
   </div>
   <div class="hero-image" data-aos="fade-up">
-    <img src="ImagenOficina.png" alt="Do It Now" style="max-height: 30vh; object-fit: contain;">
+    <img src="ImagenOficina.png" alt="Do It Now Portada">
   </div>
 </section>
 
-<div id="areas">
-    <section class="area" data-aos="fade-up">
-        <img src="https://images.unsplash.com/photo-1559757148-5c350d0d3c56" alt="Bioneuroemoción">
-        <div>
-          <h3>Bioneuroemoción</h3>
-          <p class="intro">Escuchá el mensaje oculto de tus síntomas.</p>
-          <div class="btn-group">
-            <button class="toggle-btn" onclick="showTab(this, 'que-bio')">¿Qué es?</button>
-            <button class="toggle-btn" onclick="showTab(this, 'mi-bio')">¿Es para mí?</button>
-          </div>
-          <div id="que-bio" class="extra-content">
-            <p>Investigamos la raíz emocional de tus conflictos y programas heredados.</p>
-          </div>
-          <div id="mi-bio" class="extra-content">
-            <p>Si repetís patrones en parejas o tenés síntomas físicos recurrentes.</p>
-          </div>
-        </div>
-    </section>
+<section id="bio">
+  <div class="area" data-aos="fade-up">
+    <img src="https://images.unsplash.com/photo-1559757148-5c350d0d3c56" class="area-img" alt="Bioneuroemoción">
+    <div class="area-content">
+      <h3>Bioneuroemoción</h3>
+      <p class="intro">Escuchá el mensaje oculto de tus síntomas físicos y emocionales.</p>
+      <div class="btn-group">
+        <button class="toggle-btn" onclick="showTab(this, 'que-bio')">¿Qué es?</button>
+        <button class="toggle-btn" onclick="showTab(this, 'mi-bio')">¿Es para mí?</button>
+      </div>
+      <div id="que-bio" class="extra-content">
+        <p>Indagamos en la raíz emocional de tus conflictos y programas heredados.</p>
+      </div>
+      <div id="mi-bio" class="extra-content">
+        <p>Ideal si repetís patrones en parejas o síntomas físicos recurrentes.</p>
+      </div>
+    </div>
+  </div>
+</section>
 
-    <section class="area" data-aos="fade-up">
-        <img src="Pendulo2.jpg" alt="Péndulo Hebreo">
-        <div>
-          <h3>Péndulo Hebreo</h3>
-          <p class="intro">Limpieza y recalibración energética.</p>
-          <div class="btn-group">
-            <button class="toggle-btn" onclick="showTab(this, 'que-pen')">¿Qué es?</button>
-            <button class="toggle-btn" onclick="showTab(this, 'mi-pen')">¿Es para mí?</button>
-          </div>
-          <div id="que-pen" class="extra-content">
-            <p>Detecta y elimina bloqueos en tu aura y restaura tus chakras.</p>
-          </div>
-          <div id="mi-pen" class="extra-content">
-            <p>Ideal si sentís fatiga extrema o proyectos estancados.</p>
-          </div>
-        </div>
-    </section>
+<section id="pendulo">
+  <div class="area" data-aos="fade-up">
+    <img src="Pendulo2.jpg" class="area-img" alt="Péndulo Hebreo">
+    <div class="area-content">
+      <h3>Péndulo Hebreo</h3>
+      <p class="intro">Limpieza profunda y recalibración energética.</p>
+      <div class="btn-group">
+        <button class="toggle-btn" onclick="showTab(this, 'que-pen')">¿Qué es?</button>
+        <button class="toggle-btn" onclick="showTab(this, 'mi-pen')">¿Es para mí?</button>
+      </div>
+      <div id="que-pen" class="extra-content">
+        <p>Elimina bloqueos en el aura y restaura la vibración de tus chakras.</p>
+      </div>
+      <div id="mi-pen" class="extra-content">
+        <p>Si sentís fatiga, pesadez mental o proyectos estancados.</p>
+      </div>
+    </div>
+  </div>
+</section>
 
-    <section class="area" data-aos="fade-up">
-        <img src="Hipnosis.jpg" alt="Hipnosis">
-        <div>
-          <h3>Hipnosis Clínica</h3>
-          <p class="intro">Reprogramación del subconsciente.</p>
-          <div class="btn-group">
-            <button class="toggle-btn" onclick="showTab(this, 'que-hip')">¿Qué es?</button>
-            <button class="toggle-btn" onclick="showTab(this, 'mi-hip')">¿Es para mí?</button>
-          </div>
-          <div id="que-hip" class="extra-content">
-            <p>Estado de enfoque para instalar creencias potenciadoras de forma segura.</p>
-          </div>
-          <div id="mi-hip" class="extra-content">
-            <p>Para superar fobias, hábitos nocivos o aumentar autoconfianza.</p>
-          </div>
-        </div>
-    </section>
-
-    <section class="area" data-aos="fade-up">
-        <img src="Coaching.png" alt="Coaching Deportivo">
-        <div>
-          <h3>Coaching</h3>
-          <p class="intro">Máximo potencial y maestría personal.</p>
-          <div class="btn-group">
-            <button class="toggle-btn" onclick="showTab(this, 'que-coa')">¿Qué es?</button>
-            <button class="toggle-btn" onclick="showTab(this, 'mi-coa')">¿Es para mí?</button>
-          </div>
-          <div id="que-coa" class="extra-content">
-            <p>Trabajamos sobre el lenguaje y la emoción para pasar a ser protagonista.</p>
-          </div>
-          <div id="mi-coa" class="extra-content">
-            <p>Para deportistas bajo presión o líderes en procesos de cambio.</p>
-          </div>
-        </div>
-    </section>
-</div>
+<section id="hipnosis">
+  <div class="area" data-aos="fade-up">
+    <img src="Hipnosis.jpg" class="area-img" alt="Hipnosis">
+    <div class="area-content">
+      <h3>Hipnosis Clínica</h3>
+      <p class="intro">Reprogramación directa de creencias limitantes.</p>
+      <div class="btn-group">
+        <button class="toggle-btn" onclick="showTab(this, 'que-hip')">¿Qué es?</button>
+        <button class="toggle-btn" onclick="showTab(this, 'mi-hip')">¿Es para mí?</button>
+      </div>
+      <div id="que-hip" class="extra-content">
+        <p>Relajación profunda para desarmar traumas y fortalecer confianza.</p>
+      </div>
+      <div id="mi-hip" class="extra-content">
+        <p>Para superar fobias, dejar hábitos nocivos o sanar heridas.</p>
+      </div>
+    </div>
+  </div>
+</section>
 
 <section id="sessions">
   <h2 data-aos="fade-up">Modalidades</h2>
   <div class="session-cards">
     <div class="card" data-aos="zoom-in">
-      <h3>Sesión Focalizada</h3>
-      <p>Indagación puntual o Péndulo Hebreo. (1h)</p>
+      <h3>Focalizada</h3>
+      <p>Síntoma puntual o limpieza con Péndulo. (1h)</p>
     </div>
     <div class="card" data-aos="zoom-in">
-      <h3>Proceso Do It Now</h3>
-      <p>Inmersión profunda integral. (2h)</p>
+      <h3>Integral</h3>
+      <p>Inmersión profunda con todas las herramientas. (2h)</p>
     </div>
   </div>
 </section>
 
-<section class="about" id="about">
-    <div data-aos="fade-up" style="text-align: center;">
-      <h2 style="margin-bottom: 10px;">Soy Claudia</h2>
-      <img src="Claudia.png" alt="Claudia" style="height: 180px; width: 180px; border-radius: 50%; object-fit: cover; margin-bottom: 20px;">
-      <ul style="color:var(--muted); list-style:none; font-size: 0.9rem; text-align: center;">
-          <li>• Coach Ontológico y Deportivo</li>
-          <li>• Posgrado Psicología Deportiva</li>
-          <li>• Maestría en Biodescodificación</li>
-          <li>• Hipnosis y Péndulo Hebreo</li>
-      </ul>
-    </div>
+<section id="about">
+  <div data-aos="fade-up">
+    <h2>Soy Claudia</h2>
+    <img src="Claudia.png" alt="Claudia" style="width:180px; height:180px; border-radius:50%; object-fit:cover; margin-bottom:20px; border: 2px solid var(--accent);">
+    <p style="max-width:500px; margin: 0 auto; color:var(--muted);">Coach Ontológico y experta en Biodescodificación. Mi propósito es acompañarte en tu transformación personal.</p>
+  </div>
 </section>
 
 <section id="contact">
-  <div class="contact-box" data-aos="flip-up">
-    <h2>Hablemos</h2>
-    <p style="margin-bottom: 30px;">¿Estás listo para el cambio?</p>
-    <a href="https://wa.me/543424236021" class="toggle-btn" style="text-decoration:none; padding: 18px 50px; display: block;">WhatsApp Directo</a>
+  <div class="contact-box" data-aos="flip-up" style="width:100%; max-width:500px;">
+    <h2>¿Empezamos?</h2>
+    <p style="margin-bottom: 30px;">Dá el primer paso hoy mismo.</p>
+    <a href="https://wa.me/543424236021" class="toggle-btn" style="text-decoration:none; padding: 18px 40px; display: inline-block;">WhatsApp Directo</a>
   </div>
 </section>
 
-<footer class="footer">© 2025 · Do It Now</footer>
+<footer class="footer">© 2025 · Do It Now · Claudia De Vaux</footer>
 
 <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 <script>
-  AOS.init({ duration: 800, once: false }); // Once: false para que repita al subir/bajar
+  AOS.init({ duration: 800, once: false });
   
-  const hamburger = document.getElementById('hamburger');
   const navMenu = document.getElementById('nav-menu');
   
-  hamburger.addEventListener('click', () => {
-    hamburger.classList.toggle('active');
+  function toggleMenu() {
     navMenu.classList.toggle('active');
-  });
+  }
 
   function closeMenu() {
-    hamburger.classList.remove('active');
     navMenu.classList.remove('active');
   }
 
@@ -416,15 +375,6 @@ h2 {
       btn.classList.add('active');
     }
   }
-
-  window.addEventListener('scroll', () => {
-    const header = document.getElementById('header');
-    if (window.scrollY > 50) {
-      header.classList.add('scrolled');
-    } else {
-      header.classList.remove('scrolled');
-    }
-  });
 </script>
 </body>
 </html>
